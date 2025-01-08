@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto;
+            width: 90%;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #accounts-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #accounts-list li {
+            margin: 5px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #accounts-list li:hover {
+            background: #f1f1f1;
+        }
+
+        input[type="text"], input[type="password"], input[type="date"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #error-message {
+            color: red;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            table th, table td {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Accounting Application</h1>
+
+        <!-- Login Section -->
+        <div id="login-section">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button id="login-btn">Login</button>
+            <div id="login-error" style="color: red;"></div>
+        </div>
+
+        <!-- Accounts Section -->
+        <div id="accounts-section" style="display: none;">
+            <h2>Accounts</h2>
+            <button id="add-account-btn">Add Account</button>
+            <ul id="accounts-list"></ul>
+        </div>
+
+        <!-- Transaction Section -->
+        <div id="transaction-section" style="display: none;">
+            <button id="back-to-accounts">Back to Accounts</button>
+            <h2 id="account-title"></h2>
+            <form id="transaction-form">
+                <input type="date" id="date" required>
+                <input type="text" id="slip-number" placeholder="Slip Number" required>
+                <input type="text" id="description" placeholder="Description" required>
+                <input type="number" id="credit" placeholder="Credit" step="0.01">
+                <input type="number" id="debit" placeholder="Debit" step="0.01">
+                <input type="text" id="code" placeholder="Linked Account Code">
+                <button type="submit">Add Transaction</button>
+            </form>
+            <div id="error-message"></div>
+            <button id="create-pdf-btn">Create PDF</button>
+            <div id="pdf-options" style="display: none;">
+                <button id="whole-account">Whole Account</button>
+                <button id="partial-account">Till a Particular Line</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Line</th>
+                        <th>Date</th>
+                        <th>Slip Number</th>
+                        <th>Description</th>
+                        <th>Credit</th>
+                        <th>Debit</th>
+                        <th>Total</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions-table"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.18/jspdf.plugin.autotable.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
